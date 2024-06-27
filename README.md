@@ -1,6 +1,6 @@
 尚庭公寓是一个公寓租赁平台项目，包含**移动端**和**后台管理系统**，其中移动端面向广大用户，提供找房、看房预约、租约管理等功能，后台管理系统面向管理员，提供公寓（房源）管理、租赁管理、用户管理等功能
 
-### 6.1.2 部署MySQL
+### 1.1 部署MySQL
 
 在`server01`部署MySQL，具体步骤可[参考文档](https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/linux-installation-yum-repo.html)。
 
@@ -96,7 +96,7 @@
      FLUSH PRIVILEGES;
      ```
 
-### 6.1.3 部署Redis
+### 1.2 部署Redis
 
 在`server01`部署Redis服务，安装方式采用yum在线安装，安装版本为`redis-7.0.13`，具体步骤如下
 
@@ -168,7 +168,7 @@
    systemctl enable redis
    ```
 
-### 6.1.4 部署MinIO
+### 1.3 部署MinIO
 
 在`server01`部署MinIO，安装方式采用rpm离线安装，具体步骤可参考[官方文档](https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-single-node-single-drive.html#minio-snsd)。
 

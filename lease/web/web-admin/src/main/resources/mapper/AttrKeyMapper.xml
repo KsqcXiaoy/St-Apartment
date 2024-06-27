@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.lease.web.admin.mapper.AttrKeyMapper">
+    
+    <resultMap id="AttrKeyVoMap" type="com.atguigu.lease.web.admin.vo.attr.AttrKeyVo">
+        <id property="id" column="id"></id>
+        <result property="name" column="name" ></result>
+        <collection property="attrValueList" ofType="com.atguigu.lease.model.entity.AttrValue">
+            <id property="id" column="attr_value_id"></id>
+            <result property="name" column="attr_value_name"></result>
+            <result property="attrKeyId" column="attr_key_id"></result>
+        </collection>
+    </resultMap>
+<!--
+做联合查询时，只用join on 默认为inner join（内连接），如果另一个表中无数据，则主表的数据也不会被查询出来
+应该使用left join on 可以显示主表的所有信息
+关于过滤条件，where中只写主表的条件，联合表的条件写在left join on 后面（例如：逻辑删除，where中写主表条件，left join on写联合表条件）
+-->
+    <select id="listAttrInfo" resultMap="AttrKeyVoMap">
+        select k.id,
+               k.name,
+               v.id   attr_value_id,
+               v.name attr_value_name,
+               v.attr_key_id
+        from attr_key k
+                 left join attr_value v
+                           on k.id = v.attr_key_id and v.is_deleted = 0
+        where k.is_deleted = 0
+    </select>
+</mapper>
